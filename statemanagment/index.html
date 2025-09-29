@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State Management Demo</title>
+</head>
+<body>
+    <h1>Current App Time: <span id="app-clock">--:--:--</span></h1>
+    <button id="update-button">Update Time</button>
+    <p>The time below is *only* updated by a dedicated render function.</p>
+
+    <script>
+        // ===================================
+        // 1. APPLICATION STATE (THE DATA)
+        // This is the single source of truth.
+        // ===================================
+        const AppState = {
+            currentTime: "30:00", // Start value
+            updateCount: 0        // A new piece of data to track clicks
+        };
+
+        // ===================================
+        // 2. UI REFERENCES (THE HTML ELEMENTS)
+        // ===================================
+        const clockDisplay = document.getElementById("app-clock");
+        const updateButton = document.getElementById("update-button");
+
+        // ===================================
+        // 3. THE RENDER FUNCTION (STATE → UI)
+        // Responsibility: ONLY read AppState and update ALL relevant HTML.
+        // ===================================
+        function renderUI() {
+            // Update the clock display based on AppState
+            clockDisplay.textContent = AppState.currentTime;
+
+            // If we had more elements, we would update them here too:
+            updateButton.textContent = `Update Time (Clicked ${AppState.updateCount} times)`;
+        }
+
+        // ===================================
+        // 4. THE ACTION HANDLER (UI → STATE)
+        // Responsibility: ONLY change the AppState, then trigger the update.
+        // ===================================
+        function handleUpdateTime() {
+            // A. CHANGE THE STATE (The data changes here)
+            const now = new Date();
+            AppState.currentTime = now.toLocaleTimeString(); // Generate a NEW time string
+            AppState.updateCount++; // Change the count
+
+            // B. CALL THE RENDERER (The crucial step!)
+            // We tell the UI to look at the new data.
+            renderUI();
+        }
+
+        // ===================================
+        // 5. INITIALIZATION & LISTENERS
+        // ===================================
+        // 1. Set the initial state on page load.
+        renderUI();
+
+        // 2. Attach the action handler to the button.
+        updateButton.addEventListener("click", handleUpdateTime);
+    </script>
+</body>
+</html>
