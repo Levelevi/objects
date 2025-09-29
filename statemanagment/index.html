@@ -3,64 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>State Management Demo</title>
+    <title>Cart Counter</title>
+    <style>
+        body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f4f8;
+}
+
+.counter-app {
+    text-align: center;
+    background: white;
+    padding: 40px 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+    font-size: 1.8em;
+}
+
+.count-display {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #007bff;
+    margin-left: 10px;
+}
+
+.controls {
+    margin-top: 25px;
+}
+
+.btn {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.btn-add {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-add:hover {
+    background-color: #1e7e34;
+}
+
+.btn-remove {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-remove:hover {
+    background-color: #c82333;
+}
+    </style>
 </head>
 <body>
-    <h1>Current App Time: <span id="app-clock">--:--:--</span></h1>
-    <button id="update-button">Update Time</button>
-    <p>The time below is *only* updated by a dedicated render function.</p>
+    <div class="counter-app">
+        <h1>Items in Cart: 
+            <span id="item-count" class="count-display">0</span>
+        </h1>
+        <div class="controls">
+            <button id="add-button" class="btn btn-add">Add Item</button>
+            <button id="remove-button" class="btn btn-remove">Remove Item</button>
+        </div>
+    </div>
 
     <script>
-        // ===================================
-        // 1. APPLICATION STATE (THE DATA)
-        // This is the single source of truth.
-        // ===================================
-        const AppState = {
-            currentTime: "30:00", // Start value
-            updateCount: 0        // A new piece of data to track clicks
-        };
+        const alldata=document.querySelector(".counter-app");
+        const itemCount=document.getElementById("item-count");
 
-        // ===================================
-        // 2. UI REFERENCES (THE HTML ELEMENTS)
-        // ===================================
-        const clockDisplay = document.getElementById("app-clock");
-        const updateButton = document.getElementById("update-button");
-
-        // ===================================
-        // 3. THE RENDER FUNCTION (STATE → UI)
-        // Responsibility: ONLY read AppState and update ALL relevant HTML.
-        // ===================================
-        function renderUI() {
-            // Update the clock display based on AppState
-            clockDisplay.textContent = AppState.currentTime;
-
-            // If we had more elements, we would update them here too:
-            updateButton.textContent = `Update Time (Clicked ${AppState.updateCount} times)`;
+        const appstate={
+            iteamcart:0
+        }
+        function updatestate(event){
+            const target=event.target;
+            if(target.id==="add-button"){
+                updateappstate();
+            }
+        }
+        function updateappstate(){
+            appstate.iteamcart.textContent="5"
+            uistate();
+        }    
+        function uistate(){
+            iteamcart.textContent=appstate.iteamcart;
         }
 
-        // ===================================
-        // 4. THE ACTION HANDLER (UI → STATE)
-        // Responsibility: ONLY change the AppState, then trigger the update.
-        // ===================================
-        function handleUpdateTime() {
-            // A. CHANGE THE STATE (The data changes here)
-            const now = new Date();
-            AppState.currentTime = now.toLocaleTimeString(); // Generate a NEW time string
-            AppState.updateCount++; // Change the count
+      alldata.addEventListener("click",updatestate);
 
-            // B. CALL THE RENDERER (The crucial step!)
-            // We tell the UI to look at the new data.
-            renderUI();
-        }
-
-        // ===================================
-        // 5. INITIALIZATION & LISTENERS
-        // ===================================
-        // 1. Set the initial state on page load.
-        renderUI();
-
-        // 2. Attach the action handler to the button.
-        updateButton.addEventListener("click", handleUpdateTime);
     </script>
 </body>
 </html>
