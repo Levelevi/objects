@@ -6,6 +6,51 @@
     <title>Document</title>
 </head>
 <body>
-    
+   
+<h1>Task: Student Marks Manager
+Create an object student with:
+name: "Aman"
+age: 20
+marks → another nested object with subjects:
+{
+  math: 90,
+  science: 85,
+  english: 88
+}
+Print out the science mark using dot notation.
+Add a new subject "history" with marks 92 using bracket notation.
+Update the "math" mark to 95 using a variable key.
+Finally, log the whole object to see the changes.
+⚡ Bonus challenge: Write a function getMark(subject) that takes the subject name as input (like "english") and returns the mark from the object.</h1>
+    <script>
+        const student={
+            name: "Aman",
+            age: 20,
+            marks:{
+                math: 90,
+                science: 85,
+                english: 88 
+            }
+        }
+        console.log(student.science);
+        student.history=95;
+       const marks = math;
+       marks=95;
+       console.log(student);
+
+// const student={
+//     name:"aman",
+//     age:20
+// }
+// const prop="age"
+// console.log(student[prop]);
+        // const car={
+        //     brand:"Toyota",
+        //     model:"Supra",
+        //     year: 2022
+        // }
+
+        // console.log(car);
+    </script>
 </body>
 </html>
