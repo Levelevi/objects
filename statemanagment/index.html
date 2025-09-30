@@ -1,101 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart Counter</title>
-    <style>
-        body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f4f8;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Console Banking & Shopping System Objective</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f6fa;
+      color: #2f3640;
+      margin: 0;
+      padding: 20px;
+    }
 
-.counter-app {
-    text-align: center;
-    background: white;
-    padding: 40px 50px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
+    h1 {
+      color: #e84118;
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-h1 {
-    color: #333;
-    font-size: 1.8em;
-}
+    h2 {
+      color: #40739e;
+      margin-top: 30px;
+    }
 
-.count-display {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #007bff;
-    margin-left: 10px;
-}
+    ul {
+      margin-top: 10px;
+      line-height: 1.6;
+    }
 
-.controls {
-    margin-top: 25px;
-}
+    li {
+      margin-bottom: 8px;
+    }
 
-.btn {
-    padding: 10px 20px;
-    margin: 0 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 600;
-    transition: background-color 0.3s;
-}
+    .note {
+      background-color: #f1f2f6;
+      border-left: 5px solid #00a8ff;
+      padding: 10px 15px;
+      margin: 15px 0;
+      border-radius: 5px;
+    }
 
-.btn-add {
-    background-color: #28a745;
-    color: white;
-}
-
-.btn-add:hover {
-    background-color: #1e7e34;
-}
-
-.btn-remove {
-    background-color: #dc3545;
-    color: white;
-}
-
-.btn-remove:hover {
-    background-color: #c82333;
-}
-    </style>
+    code {
+      background-color: #dcdde1;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+  </style>
 </head>
 <body>
-    <div class="counter-app">
-        <h1>Items in Cart: 
-            <span id="item-count" class="count-display">0</span>
-        </h1>
-        <div class="controls">
-            <button id="add-button" class="btn btn-add">Add Item</button>
-            <button id="remove-button" class="btn btn-remove">Remove Item</button>
-        </div>
-    </div>
 
-    <script>
-        const userData = {
-  id: 42,
-  email: "user@example.com",
-  isVerified: false
-};
-let username="UserName";
-userData[username]="GeminiUser";
-     
-userData.isVerified=true;
-delete userData.email;
+  <h1>Console Banking & Shopping System</h1>
 
+  <p>Build a console-based system to manage users, accounts, and a shopping cart.</p>
 
-console.log(userData.lastlogin)
-console.log(userData)
+  <h2>Each user should have:</h2>
+  <ul>
+    <li><code>username</code> (string)</li>
+    <li><code>balance</code> (number)</li>
+    <li><code>cart</code> (object storing items and quantities)</li>
+  </ul>
 
-    </script>
+  <h2>Implement functionality to:</h2>
+  <ul>
+    <li>Add a user with an initial balance.</li>
+    <li>Deposit or withdraw money from the user’s account.</li>
+    <li>Add items to cart, including item name, price, and quantity.</li>
+    <li>Remove or update items in the cart.</li>
+    <li>Checkout: calculate total cart price, check if user has enough balance, deduct it, and empty the cart if successful.</li>
+  </ul>
+
+  <h2>Provide dynamic status messages:</h2>
+  <ul>
+    <li>If balance is low → <code>"Insufficient balance"</code></li>
+    <li>After checkout → <code>"USERNAME successfully purchased items for TOTAL_AMOUNT"</code></li>
+    <li>When adding/removing items → <code>"ITEM_NAME updated to QUANTITY in the cart"</code></li>
+  </ul>
+
+  <h2>Handle edge cases gracefully:</h2>
+  <ul>
+    <li>Trying to withdraw more than balance</li>
+    <li>Adding zero or negative quantity</li>
+    <li>Checking out an empty cart</li>
+  </ul>
+
+  <h2>Notes:</h2>
+  <div class="note">
+    Everything should be dynamic using objects and <code>bracket notation</code> where applicable — users and their carts should be manipulable at runtime.
+  </div>
+<script>
+// const appstate = {};
+
+// const userResponse = prompt("How can we help you? Press Y to see options, N to end this process.");
+
+// if (userResponse && userResponse.toLowerCase() === "y") {
+//     const openBank = prompt("To open bank account press Y");
+//     if (openBank && openBank.toLowerCase() === "y") {
+//         const userName = prompt("Enter your name:");
+//         const userBalance = Number(prompt("Enter amount you want to store:"));
+//         const user = {
+//             userName: userName,
+//             userBalance: userBalance
+//         };
+        
+//         // Add to appstate
+//            let userr=userName;
+//         appstate[userr]=user;
+//         appstate.user = user;
+//     }
+// }
+
+// console.log(appstate);
+
+const projectStatus={}
+let user={
+name:"singh",
+age:22
+}
+
+let name="jugraj"
+let changename=name;
+projectStatus[changename]=user
+
+console.log(projectStatus);
+
+</script>
+
 </body>
 </html>
