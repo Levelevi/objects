@@ -81,27 +81,20 @@ h1 {
     </div>
 
     <script>
-        const alldata=document.querySelector(".counter-app");
-        const itemCount=document.getElementById("item-count");
+        const userData = {
+  id: 42,
+  email: "user@example.com",
+  isVerified: false
+};
+let username="UserName";
+userData[username]="GeminiUser";
+     
+userData.isVerified=true;
+delete userData.email;
 
-        const appstate={
-            iteamcart:0
-        }
-        function updatestate(event){
-            const target=event.target;
-            if(target.id==="add-button"){
-                updateappstate();
-            }
-        }
-        function updateappstate(){
-            appstate.iteamcart.textContent="5"
-            uistate();
-        }    
-        function uistate(){
-            iteamcart.textContent=appstate.iteamcart;
-        }
 
-      alldata.addEventListener("click",updatestate);
+console.log(userData.lastlogin)
+console.log(userData)
 
     </script>
 </body>
