@@ -3,129 +3,171 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Console Banking & Shopping System Objective</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f5f6fa;
-      color: #2f3640;
-      margin: 0;
-      padding: 20px;
-    }
-
-    h1 {
-      color: #e84118;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    h2 {
-      color: #40739e;
-      margin-top: 30px;
-    }
-
-    ul {
-      margin-top: 10px;
-      line-height: 1.6;
-    }
-
-    li {
-      margin-bottom: 8px;
-    }
-
-    .note {
-      background-color: #f1f2f6;
-      border-left: 5px solid #00a8ff;
-      padding: 10px 15px;
-      margin: 15px 0;
-      border-radius: 5px;
-    }
-
-    code {
-      background-color: #dcdde1;
-      padding: 2px 5px;
-      border-radius: 3px;
-      font-family: monospace;
-    }
-  </style>
+  <title>Dynamic Banking & Shopping System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>Console Banking & Shopping System</h1>
+  <div class="container">
+    <h1>Dynamic Banking & Shopping System</h1>
+    <p class="text-center">Manage users, their bank accounts, and shopping carts. You'll implement all the JavaScript logic!</p>
 
-  <p>Build a console-based system to manage users, accounts, and a shopping cart.</p>
+    <!-- Current User Card -->
+    <div class="user-card-container">
+      <div id="currentUserCard" class="credit-card">
+        <div class="card-header">
+          <div class="card-logo">BANK</div>
+          <div class="card-chip"></div>
+        </div>
+        <div id="cardNumber" class="card-number">**** **** **** 0000</div>
+        <div class="card-footer">
+          <div id="cardHolderName" class="card-holder-name">NO USER SELECTED</div>
+          <div id="cardBalance" class="card-balance">$0.00</div>
+        </div>
+      </div>
+    </div>
 
-  <h2>Each user should have:</h2>
-  <ul>
-    <li><code>username</code> (string)</li>
-    <li><code>balance</code> (number)</li>
-    <li><code>cart</code> (object storing items and quantities)</li>
-  </ul>
+    <!-- User Management Section -->
+    <h2>User Management</h2>
+    <div class="grid-layout">
+      <!-- Create New User -->
+      <div class="card-section">
+        <h3>Create New User</h3>
+        <div class="form-group">
+          <label for="newUsername">Username</label>
+          <input type="text" id="newUsername" placeholder="Enter username" required>
+        </div>
+        <div class="form-group">
+          <label for="initialBalance">Initial Balance</label>
+          <input type="number" id="initialBalance" placeholder="e.g., 1000" min="0" value="0" required>
+        </div>
+        <button id="createUserBtn" class="btn btn-primary">Create User</button>
+      </div>
 
-  <h2>Implement functionality to:</h2>
-  <ul>
-    <li>Add a user with an initial balance.</li>
-    <li>Deposit or withdraw money from the user’s account.</li>
-    <li>Add items to cart, including item name, price, and quantity.</li>
-    <li>Remove or update items in the cart.</li>
-    <li>Checkout: calculate total cart price, check if user has enough balance, deduct it, and empty the cart if successful.</li>
-  </ul>
+      <!-- Select User -->
+      <div class="card-section">
+        <h3>Select Active User</h3>
+        <div id="userList" class="user-list">
+          <!-- User items will be dynamically loaded here by JS -->
+          <div class="user-list-item">
+            <span class="user-info">John Doe ($1500.00)</span>
+            <div class="user-actions">
+              <button class="btn btn-primary btn-select-user" data-username="John Doe">Select</button>
+            </div>
+          </div>
+          <div class="user-list-item">
+            <span class="user-info">Jane Smith ($500.00)</span>
+            <div class="user-actions">
+              <button class="btn btn-primary btn-select-user" data-username="Jane Smith">Select</button>
+            </div>
+          </div>
+          <p id="noUsersMessage" style="text-align: center; color: #7f8c8d; padding: 10px; display: none;">No users created yet.</p>
+        </div>
+      </div>
+    </div>
 
-  <h2>Provide dynamic status messages:</h2>
-  <ul>
-    <li>If balance is low → <code>"Insufficient balance"</code></li>
-    <li>After checkout → <code>"USERNAME successfully purchased items for TOTAL_AMOUNT"</code></li>
-    <li>When adding/removing items → <code>"ITEM_NAME updated to QUANTITY in the cart"</code></li>
-  </ul>
+    <!-- Banking Actions Section -->
+    <h2>Banking Actions</h2>
+    <div class="grid-layout">
+      <!-- Deposit Funds -->
+      <div class="card-section">
+        <h3>Deposit Funds</h3>
+        <div class="form-group">
+          <label for="depositAmount">Amount to Deposit</label>
+          <input type="number" id="depositAmount" placeholder="e.g., 500" min="0" required>
+        </div>
+        <button id="depositBtn" class="btn btn-primary">Deposit</button>
+      </div>
 
-  <h2>Handle edge cases gracefully:</h2>
-  <ul>
-    <li>Trying to withdraw more than balance</li>
-    <li>Adding zero or negative quantity</li>
-    <li>Checking out an empty cart</li>
-  </ul>
+      <!-- Withdraw Funds -->
+      <div class="card-section">
+        <h3>Withdraw Funds</h3>
+        <div class="form-group">
+          <label for="withdrawAmount">Amount to Withdraw</label>
+          <input type="number" id="withdrawAmount" placeholder="e.g., 200" min="0" required>
+        </div>
+        <button id="withdrawBtn" class="btn btn-primary">Withdraw</button>
+      </div>
+    </div>
 
-  <h2>Notes:</h2>
-  <div class="note">
-    Everything should be dynamic using objects and <code>bracket notation</code> where applicable — users and their carts should be manipulable at runtime.
+    <!-- Shopping Section -->
+    <h2>Shopping Cart</h2>
+    <div class="grid-layout">
+      <!-- Add Item to Cart -->
+      <div class="card-section">
+        <h3>Add Item to Cart</h3>
+        <div class="form-group">
+          <label for="itemName">Item Name</label>
+          <input type="text" id="itemName" placeholder="e.g., Laptop" required>
+        </div>
+        <div class="form-group">
+          <label for="itemPrice">Item Price</label>
+          <input type="number" id="itemPrice" placeholder="e.g., 1200" min="0.01" step="0.01" required>
+        </div>
+        <div class="form-group">
+          <label for="itemQuantity">Quantity</label>
+          <input type="number" id="itemQuantity" placeholder="e.g., 1" min="1" value="1" required>
+        </div>
+        <button id="addItemBtn" class="btn btn-primary">Add to Cart</button>
+      </div>
+
+      <!-- Current Shopping Cart -->
+      <div class="card-section">
+        <h3>Your Cart (<span id="activeUsernameCart">No User</span>)</h3>
+        <div id="shoppingCartList" class="cart-list">
+          <!-- Cart items will be dynamically loaded here by JS -->
+          <p id="emptyCartMessage" style="text-align: center; color: #7f8c8d; padding: 10px; display: block;">Cart is empty.</p>
+        </div>
+        <div id="cartSummary" class="cart-summary" style="display: none;">
+          <span>Total:</span>
+          <span id="cartTotal">$0.00</span>
+        </div>
+        <div class="btn-group">
+          <button id="updateCartBtn" class="btn btn-primary" style="display: none;">Update Cart</button>
+          <button id="checkoutBtn" class="btn btn-success" style="display: none;">Checkout</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Global Status Message Area -->
+    <div id="statusMessage" class="status-message info">
+      Welcome! Please create or select a user to begin.
+    </div>
+
+    <!-- Objective Reminder -->
+    <hr style="width: 100%; border: 0; border-top: 1px dashed var(--border-color); margin: 50px 0;">
+    <h2 style="text-align: center;">Your JS Implementation Objective:</h2>
+    <div class="grid-layout" style="grid-template-columns: 1fr;">
+      <div class="card-section">
+        <h3>Core User & Account Management:</h3>
+        <ul>
+          <li>Implement user creation with <code>username</code> and <code>initialBalance</code>.</li>
+          <li>Handle selecting an active user for all subsequent actions.</li>
+          <li>Enable depositing funds into the active user's account.</li>
+          <li>Enable withdrawing funds, preventing overdrafts.</li>
+        </ul>
+      </div>
+      <div class="card-section">
+        <h3>Shopping Cart Logic:</h3>
+        <ul>
+          <li>Add items to the active user's <code>cart</code> (item name, price, quantity).</li>
+          <li>Update item quantities or remove items from the cart.</li>
+          <li>Implement the checkout process: calculate total, check balance, deduct, and clear cart.</li>
+        </ul>
+      </div>
+      <div class="card-section">
+        <h3>Dynamic UI Updates & Error Handling:</h3>
+        <ul>
+          <li>Update the credit card display (username, balance) based on the active user.</li>
+          <li>Dynamically render cart items and total.</li>
+          <li>Display appropriate <code>status-message</code> for success, error, and info.</li>
+          <li>Handle edge cases: insufficient balance, invalid quantities, empty cart.</li>
+        </ul>
+      </div>
+    </div>
+
   </div>
-<script>
-// const appstate = {};
-
-// const userResponse = prompt("How can we help you? Press Y to see options, N to end this process.");
-
-// if (userResponse && userResponse.toLowerCase() === "y") {
-//     const openBank = prompt("To open bank account press Y");
-//     if (openBank && openBank.toLowerCase() === "y") {
-//         const userName = prompt("Enter your name:");
-//         const userBalance = Number(prompt("Enter amount you want to store:"));
-//         const user = {
-//             userName: userName,
-//             userBalance: userBalance
-//         };
-        
-//         // Add to appstate
-//            let userr=userName;
-//         appstate[userr]=user;
-//         appstate.user = user;
-//     }
-// }
-
-// console.log(appstate);
-
-const projectStatus={}
-let user={
-name:"singh",
-age:22
-}
-
-let name="jugraj"
-let changename=name;
-projectStatus[changename]=user
-
-console.log(projectStatus);
-
-</script>
 
 </body>
 </html>
