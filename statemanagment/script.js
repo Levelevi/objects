@@ -1,4 +1,3 @@
-
 const newUsername = document.getElementById("newUsername");
 const initialBalance = document.getElementById("initialBalance");
 const createUserBtn = document.getElementById("createUserBtn"); 
@@ -15,7 +14,6 @@ function validatedata(event) {
     }
     let name = newUsername.value; 
     appState[name] = newUser;
-    console.log(appState); 
     newUsername.value="";
     initialBalance.value="";
      uiUpdate();
@@ -28,14 +26,18 @@ function generatePin() {
 }
 
 function uiUpdate(){
-    const usernames = Object.keys(appState); 
+    const usernames = Object.keys(appState);
+
     for (let key of usernames) {
         const user = appState[key];
+        newUsername.innerText = user.userName;
+        console.log("user",user);
         console.log("Username:", user.userName);
         console.log("Balance:", user.Balance);   
         console.log("Account:", user.accountNo);
         console.log("PIN:", user.pinNumber);
     }
+
 }
 
 
