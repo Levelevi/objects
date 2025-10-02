@@ -2,6 +2,10 @@ const newUsername = document.getElementById("newUsername");
 const initialBalance = document.getElementById("initialBalance");
 const createUserBtn = document.getElementById("createUserBtn"); 
 const cardNumber=document.getElementById("cardNumber");
+const cardHolderName=document.getElementById("cardHolderName");
+const cardBalance=document.getElementById("cardBalance");
+const userList=document.getElementById("userList");
+
 const appState = {}; 
 function validatedata(event) {
     event.preventDefault(); 
@@ -30,12 +34,19 @@ function uiUpdate(){
 
     for (let key of usernames) {
         const user = appState[key];
-        newUsername.innerText = user.userName;
-        console.log("user",user);
-        console.log("Username:", user.userName);
-        console.log("Balance:", user.Balance);   
-        console.log("Account:", user.accountNo);
-        console.log("PIN:", user.pinNumber);
+        cardHolderName.innerText = user.userName;
+        cardBalance.innerText=user.Balance;
+        cardNumber.innerText=user.accountNo;
+        let activeUser;
+        activeUser.innerHTML=`
+        <div class="user-list-item">
+            <span class="user-info">${cardHolderName} $${cardBalance}</span>
+            <div class="user-actions">
+              <button class="btn btn-primary btn-select-user" data-username="${cardHolderName}">Select</button>
+            </div>
+          </div>
+          `
+          userList.appendChild(activeUser);
     }
 
 }
