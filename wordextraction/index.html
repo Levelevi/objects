@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Two Box Layout</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      width: 400px;
+      text-align: center;
+    }
+
+    .box {
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 15px 0;
+      min-height: 80px;
+      transition: 0.3s ease;
+      background: #f9fafb;
+      font-size: 14px;
+      color: #374151;
+      text-align: left;
+    }
+
+    .box2 {
+      border: 2px dashed #6366f1;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 15px 0;
+      min-height: 80px;
+      background: linear-gradient(135deg, #eef2ff, #ffffff);
+      font-size: 14px;
+      color: #4f46e5;
+      font-style: italic;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .box2::before {
+      color: #9ca3af;
+      font-size: 13px;
+      font-style: normal;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(79,70,229,0.3);
+    }
+  </style>
+</head>
+<body>
+ <div class="container">
+  <div class="box">
+    A computer network is a system that connects two or more devices to share resources and exchange data.
+  </div>
+  <div class="box2">
+    <!-- Empty box for now -->
+  </div>
+  <button class="btn">Extract</button>
+</div>
+
+<script>
+  const btn = document.querySelector(".btn");
+  const box = document.querySelector(".box");
+  const box2 = document.querySelector(".box2");
+ const keywords=["is","a","two","or","to", "and"];
+ 
+ function filterwords(data){
+   let words = data.toLowerCase().replace(/[.,]/g, "").split(/\s+/);
+   box2.textContent=words;
+   console.log(words);
+ }
+ 
+  function Extract(event) {
+    // Use innerHTML or textContent to extract content
+    const data = box.textContent;
+    filterwords(data);
+  }
+
+  btn.addEventListener("click", Extract);
+</script>
+</body>
+</html>
